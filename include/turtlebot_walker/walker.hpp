@@ -20,13 +20,23 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+* @file walker.hpp
+ * @author Siddharth Telang (stelang@umd.edu)
+ * @brief 
+ * @version 0.1
+ * @date 2021-11-29
+ * 
+ * @copyright Copyright (c) 2021
 */
+
 
 #include <string>
 #include <sensor_msgs/LaserScan.h>
+#include <memory>
+#include <geometry_msgs/Twist.h>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-#include <memory>
+#include "../include/turtlebot_walker/obstacle_detector.hpp"
 
 class Walker {
  public:
@@ -34,11 +44,14 @@ class Walker {
     ~Walker();
     void start_walking();
     void lidarCallback(const sensor_msgs::LaserScan::ConstPtr &msg);
+    void send_velocity(std::string obs);
     int rate;
-    ros::Subscriber lidar_sub;
-    std::string topic;
+    ObstacleDetector *detect = new ObstacleDetector();
  private:
     ros::NodeHandle *nh;
     void init();
+    ros::Subscriber lidar_sub;
+    ros::Publisher vel_pub;
+    std::string topic;
 };
 

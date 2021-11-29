@@ -25,13 +25,14 @@
  * @author Siddharth Telang (stelang@umd.edu)
  * @brief 
  * @version 0.1
- * @date 2021-11-01
+ * @date 2021-11-29
  * 
  * @copyright Copyright (c) 2021
  * 
  */
 
 #include "../include/turtlebot_walker/walker.hpp"
+
 
 Walker::Walker(ros::NodeHandle *nh_) {
   nh = nh_;
@@ -40,16 +41,49 @@ Walker::Walker(ros::NodeHandle *nh_) {
 
 Walker::~Walker() {
   delete nh;
-}
-
-void lidarCallback(const sensor_msgs::LaserScan::ConstPtr &msg) {
-ROS_INFO_STREAM("Received scan");
+  delete detect;
 }
 
 void Walker::init() {
     nh->param<int>("publish_rate", rate, 100);
+    
     nh->param<std::string>("topic", topic, "/scan");
-    lidar_sub = nh->subscribe(topic, 100, &Walker::lidarCallback, this);
+    
+    this->vel_pub = this->nh->advertise<geometry_msgs::Twist>(
+         "/cmd_vel", rate, this);
+    
+    this->lidar_sub = this->nh->subscribe("/scan",
+                       rate, &Walker::lidarCallback, this);
+
+}
+
+void Walker::send_velocity(std::string obs) {
+  geometry_msgs::Twist vel;
+  if (obs == "front") {
+    vel.linear.x = 0.0;
+    vel.angular.z = 0.5;
+  } else if (obs == "right") {
+    vel.linear.x = 0.0;
+    vel.angular.z = 0.3;    
+  } else if (obs == "left") {
+    vel.linear.x = 0.0;
+    vel.angular.z = -0.3;
+  } else if (obs == "west") {
+    vel.linear.x = 0.1;
+    vel.angular.z = -0.1;    
+  } else if (obs == "east") {
+    vel.linear.x = 0.1;
+    vel.angular.z = 0.1;
+  } else {
+    vel.linear.x = 0.3;
+    vel.angular.z = 0.0;
+  }
+  vel_pub.publish(vel);
+}
+
+void Walker::lidarCallback(const sensor_msgs::LaserScan::ConstPtr& msg) {
+    std::string obs = detect->isCloseToObstacle(msg);
+    send_velocity(obs);
 }
 
 void Walker::start_walking() {
