@@ -59,6 +59,8 @@ void Walker::init() {
 
 void Walker::send_velocity(std::string obs) {
   geometry_msgs::Twist vel;
+  if (obs != "")
+    ROS_WARN("Obstacle Detected nearby");
   if (obs == "front") {
     vel.linear.x = 0.0;
     vel.angular.z = 0.5;
