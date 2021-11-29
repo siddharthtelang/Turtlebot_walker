@@ -39,8 +39,22 @@
 
 class ObstacleDetector {
  public:
+    /**
+     * @brief Construct a new Obstacle Detector object
+     * 
+     */
     ObstacleDetector();
+    /**
+     * @brief Checks if obstacle is nearby
+     * 
+     * @param msg 
+     * @return std::string 
+     */
     std::string isCloseToObstacle(const sensor_msgs::LaserScan::ConstPtr &msg);
+    /**
+     * @brief Destroy the Obstacle Detector object
+     * 
+     */
     ~ObstacleDetector();
     int range = 10;
 };

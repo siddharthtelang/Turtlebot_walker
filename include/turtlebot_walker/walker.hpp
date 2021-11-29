@@ -40,10 +40,29 @@
 
 class Walker {
  public:
+    /**
+     * @brief Construct a new Walker object
+     * 
+     * @param nh_ node handle
+     */
     Walker(ros::NodeHandle *nh_);
     ~Walker();
+    /**
+     * @brief begins the walking process
+     * 
+     */
     void start_walking();
+    /**
+     * @brief Laser Sensor callback
+     * 
+     * @param msg data from sensor
+     */
     void lidarCallback(const sensor_msgs::LaserScan::ConstPtr &msg);
+    /**
+     * @brief send velocity to TTB3
+     * 
+     * @param obs direction of obstacle
+     */
     void send_velocity(std::string obs);
     int rate;
     ObstacleDetector *detect = new ObstacleDetector();
