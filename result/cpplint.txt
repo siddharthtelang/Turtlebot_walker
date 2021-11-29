@@ -1,0 +1,12 @@
+
+siddharth@siddharth:~/ENPM808X/catkin_ws/src/turtlebot_walker/src$ cpplint *
+Done processing detect_obstacle.cpp
+Done processing walker.cpp
+Done processing walker_node.cpp
+
+siddharth@siddharth:~/ENPM808X/catkin_ws/src/turtlebot_walker/include/turtlebot_walker$ cpplint *
+Done processing obstacle_detector.hpp
+Done processing walker.hpp
+siddharth@siddharth:~/ENPM808X/catkin_ws/src/turtlebot_walker/include/turtlebot_walker$ 
+
+
