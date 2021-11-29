@@ -7,6 +7,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   sensor_msgs
   message_generation
+  laser_geometry
   tf
 )
 
@@ -19,7 +20,7 @@ include
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(walker_node src/walker.cpp src/walker_node.cpp)
+add_executable(walker_node src/walker.cpp src/walker_node.cpp src/detect_obstacle.cpp)
 
 
 target_link_libraries(walker_node
