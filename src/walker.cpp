@@ -46,15 +46,14 @@ Walker::~Walker() {
 
 void Walker::init() {
     nh->param<int>("publish_rate", rate, 100);
-    
+
     nh->param<std::string>("topic", topic, "/scan");
-    
+
     this->vel_pub = this->nh->advertise<geometry_msgs::Twist>(
          "/cmd_vel", rate, this);
-    
+
     this->lidar_sub = this->nh->subscribe("/scan",
                        rate, &Walker::lidarCallback, this);
-
 }
 
 void Walker::send_velocity(std::string obs) {
@@ -66,13 +65,13 @@ void Walker::send_velocity(std::string obs) {
     vel.angular.z = 0.5;
   } else if (obs == "right") {
     vel.linear.x = 0.0;
-    vel.angular.z = 0.3;    
+    vel.angular.z = 0.3;
   } else if (obs == "left") {
     vel.linear.x = 0.0;
     vel.angular.z = -0.3;
   } else if (obs == "west") {
     vel.linear.x = 0.1;
-    vel.angular.z = -0.1;    
+    vel.angular.z = -0.1;
   } else if (obs == "east") {
     vel.linear.x = 0.1;
     vel.angular.z = 0.1;

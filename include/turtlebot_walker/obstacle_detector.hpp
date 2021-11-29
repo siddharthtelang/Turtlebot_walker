@@ -31,11 +31,15 @@
  * 
  */
 
-#include <string>
+#ifndef INCLUDE_TURTLEBOT_WALKER_OBSTACLE_DETECTOR_HPP_
+#define INCLUDE_TURTLEBOT_WALKER_OBSTACLE_DETECTOR_HPP_
+#endif  //  INCLUDE_TURTLEBOT_WALKER_OBSTACLE_DETECTOR_HPP_
+
 #include <sensor_msgs/LaserScan.h>
+#include <memory>
+#include <string>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-#include <memory>
 
 class ObstacleDetector {
  public:

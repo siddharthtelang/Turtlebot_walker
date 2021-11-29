@@ -29,11 +29,14 @@
  * @copyright Copyright (c) 2021
 */
 
+#ifndef INCLUDE_TURTLEBOT_WALKER_WALKER_HPP_
+#define INCLUDE_TURTLEBOT_WALKER_WALKER_HPP_
+#endif  // INCLUDE_TURTLEBOT_WALKER_WALKER_HPP_
 
-#include <string>
 #include <sensor_msgs/LaserScan.h>
-#include <memory>
 #include <geometry_msgs/Twist.h>
+#include <memory>
+#include <string>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "../include/turtlebot_walker/obstacle_detector.hpp"
@@ -45,7 +48,7 @@ class Walker {
      * 
      * @param nh_ node handle
      */
-    Walker(ros::NodeHandle *nh_);
+    explicit Walker(ros::NodeHandle *nh_);
     ~Walker();
     /**
      * @brief begins the walking process
@@ -66,6 +69,7 @@ class Walker {
     void send_velocity(std::string obs);
     int rate;
     ObstacleDetector *detect = new ObstacleDetector();
+
  private:
     ros::NodeHandle *nh;
     void init();
