@@ -35,7 +35,7 @@
 
 int main(int argc, char **argv) {
     ros::init(argc, argv, "walker");
-    ros::NodeHandle *handle = new ros::NodeHandle();
+    ros::NodeHandle *handle = new ros::NodeHandle("");
     Walker walker(handle);
     walker.start_walking();
     delete handle;
