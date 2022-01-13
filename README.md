@@ -4,6 +4,14 @@
 ## Introduction
 Simple Walker algorithm for TurtleBot3 with obstacle avoidance
 
+<p align="center">
+<img src="result/Test_2.gif"/>
+</p>
+
+<p align="center">
+<img src="result/Test_3.gif"/>
+</p>
+
 ## Assumptions/Dependencies
 ROS Melodic
 
